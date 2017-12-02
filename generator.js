@@ -1,18 +1,33 @@
 #!/usr/bin/env node
 
+const _ = require('lodash')
+
 // generator
 
 const count = function*() {
-    for (let aa = 0; true; aa++)
+    for (let aa = 100; true; aa += 10)
         yield aa;
 }
 
 for (let nn of count()) {
-    if (nn >= 10) break
-    console.log(nn)
+    if (nn >= 200) break
+    console.log('for_of', nn)
 }
 
+console.log(_.isFunction(count))
+const iter_count = count();
+const iter_count_next = () => {
+    return iter_count.next();
+}
+let generated = _.times(5, iter_count_next)
+console.log(generated)
+
+// .map((xx) => {
+//     console.log('lodash', xx)
+// })
+
 console.log("================================")
+return
 
 const range = module.exports.range = function*(nn) {
     for (let kk = 0; kk < nn; kk++)
@@ -22,6 +37,11 @@ const range = module.exports.range = function*(nn) {
 for (let nn of range(5)) {
     console.log(nn)
 }
+
+_.forEach([1, 2, 3, 6], (nn, kk) => {
+    console.log('coucouc', nn, kk)
+})
+
 
 console.log("================================")
 

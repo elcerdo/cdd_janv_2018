@@ -3,13 +3,24 @@
 const Promise = require('bluebird')
 const fs = require('fs')
 const range = require('./generator').range
+const _ = require('lodash')
 
-const doStuffWithContent = (content) => {
+const doStuffWithContent_ = (content) => {
     console.log("length", content.length)
     for (let pair of content.entries()) {
         if (pair[0] >= 10) break
         console.log(pair)
     }
+    console.log('returning')
+    return content
+}
+
+const doStuffWithContent = (content) => {
+    console.log("length", content.length)
+    _.forEach(content.entries(), (pair) => {
+        if (pair[0] >= 10) return
+        console.log(pair)
+    })
     console.log('returning')
     return content
 }
