@@ -48,10 +48,12 @@ const main = Promise.coroutine(function*(name) {
         })
     console.log('dd', dd)
 
-    return
+    return "mostly_hidden"
 })
 
 const log_sep = console.log.bind(null, "================================")
+
+log_sep()
 
 main('mark')
     .then(() => {
