@@ -2,7 +2,12 @@
 
 const _ = require('lodash')
 
-// generator
+// what are generators?
+// - generators are traversable
+// - generalisted iterator creator
+// - same 'yield' keyword as in python
+// - created whith 'function*' in js
+// - traversed using (for...of) in js
 
 const count = function*() {
     for (let aa = 100; true; aa += 10)
