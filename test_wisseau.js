@@ -2,7 +2,6 @@
 
 const Promise = require('bluebird')
 
-//TODO not working
 class Hello {
     constructor(name_) {
         this.name = name_;
@@ -15,18 +14,35 @@ class Hello {
     }
 }
 
-Promise.promisifyAll(Hello.prototype)
-const hello = new Hello('mark')
-hello.sayOh()
-hello.sayHi()
+const main = Promise.coroutine(function*(name) {
+    const hello = new Hello(name)
+    hello.sayOh()
+    hello.sayHi()
 
-let aa = Promise
-    .delay(1000)
+    let aa = yield Promise
+        .delay(1000)
+        .then(() => {
+            hello.sayOh()
+        })
+        .delay(1000)
+        .then(() => {
+            hello.sayHi()
+            return "tommy FTW"
+        })
+    console.log('aa', aa)
+
+    let bb = yield Promise.resolve("coucou")
+    console.log('bb', bb)
+})
+
+main('mark')
     .then(() => {
-        hello.sayOh()
+        console.log("================================")
+        return 'susan'
     })
-    .delay(1000)
+    .then(main)
     .then(() => {
-        hello.sayHi()
-        return "tommy FTW"
+        console.log("================================")
     })
+    .return('jean-paul')
+    .then(main)
