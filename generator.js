@@ -14,20 +14,27 @@ for (let nn of count()) {
     console.log('for_of', nn)
 }
 
-console.log(_.isFunction(count))
-const iter_count = count();
-const iter_count_next = () => {
-    return iter_count.next();
+const iterate = (iter) => {
+    return () => {
+        return iter.next()
+    }
 }
-let generated = _.times(5, iter_count_next)
-console.log(generated)
 
-// .map((xx) => {
-//     console.log('lodash', xx)
-// })
+const generate = (nn, iter) => {
+    return _.times(nn, iterate(iter))
+        .filter((item) => {
+            return !item.done
+        })
+        .map((item) => {
+            return item.value
+        })
+}
+
+generate(10, count()).forEach((item) => {
+    console.log('lodash', item)
+})
 
 console.log("================================")
-return
 
 const range = module.exports.range = function*(nn) {
     for (let kk = 0; kk < nn; kk++)
@@ -35,16 +42,15 @@ const range = module.exports.range = function*(nn) {
 }
 
 for (let nn of range(5)) {
-    console.log(nn)
+    console.log('for_of', nn)
 }
 
-_.forEach([1, 2, 3, 6], (nn, kk) => {
-    console.log('coucouc', nn, kk)
+generate(10, range(5)).forEach((item) => {
+    console.log('lodash', item)
 })
 
-
 console.log("================================")
-
+return
 const demo_generator = function*(nn) {
     console.log('next', yield 42)
     console.log('next', yield "!!!!!!")
