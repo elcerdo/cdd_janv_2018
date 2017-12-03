@@ -19,7 +19,7 @@ const main = Promise.coroutine(function*(name) {
     hello.sayOh()
     hello.sayHi()
 
-    let aa = yield Promise
+    const aa = yield Promise
         .delay(1000)
         .then(() => {
             hello.sayOh()
@@ -31,18 +31,36 @@ const main = Promise.coroutine(function*(name) {
         })
     console.log('aa', aa)
 
-    let bb = yield Promise.resolve("coucou")
+    const bb = yield Promise.resolve("coucou")
     console.log('bb', bb)
+
+    const cc = yield Promise.delay(1000).return("hello")
+    console.log('cc', cc)
+
+    const dd = yield Promise.try(() => {
+            throw new Error('monde')
+            return "world";
+        })
+        .delay(10000)
+        .catch((err) => {
+            console.log("!#?!")
+            return err.message
+        })
+    console.log('dd', dd)
+
+    return
 })
+
+const log_sep = console.log.bind(null, "================================")
 
 main('mark')
     .then(() => {
-        console.log("================================")
+        log_sep()
         return 'susan'
     })
+    .tap(console.log)
     .then(main)
-    .then(() => {
-        console.log("================================")
-    })
+    .then(log_sep)
     .return('jean-paul')
+    .tap(console.log)
     .then(main)
