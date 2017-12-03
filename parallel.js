@@ -1,6 +1,17 @@
 #!/usr/bin/env node
 
 const Promise = require('bluebird')
+// Promise.config({
+//     // Enable warnings
+//     warnings: true,
+//     // Enable long stack traces
+//     longStackTraces: true,
+//     // Enable cancellation
+//     cancellation: true,
+//     // Enable monitoring
+//     monitoring: true
+// })
+
 const util = require('util')
 
 const delayedTask = (nn, str) => {
@@ -81,11 +92,11 @@ const main = Promise.coroutine(function*() {
     console.log('props', cc)
     console.log("================================")
 
-    const dd = yield Promise
+    const dd_promise = Promise
         .resolve([
             delayedTask(1000, 'slow'),
             delayedTask(500, 'fast'),
-            failingTask(5000),
+            failingTask(1500),
             delayedTask(750, 'medium'),
             failingTask(100),
             delayedTask(2000, 'very slow'),
@@ -93,6 +104,10 @@ const main = Promise.coroutine(function*() {
             failingTask(500),
         ])
         .some(3)
+        .map((task) => {
+            console.log(task)
+            return task
+        })
         .timeout(750)
         .tap(console.log)
         .tap((foo) => {
@@ -104,6 +119,7 @@ const main = Promise.coroutine(function*() {
                 second,
                 third)
         })
+    const dd = yield dd_promise
 
     console.log('spread', dd)
     console.log("================================")
