@@ -1,10 +1,21 @@
 #!/usr/bin/env node
 
-const range = require('./generator').range
+const Promise = require('bluebird')
 
-const ff = (xx) => {
-    return xx + 3;
-}
+const wait_til_resolve = Promise.coroutine(function*() {
+    const foo = yield Promise
+        .delay(1000)
+        .then(() => {
+            return 'ping_hi'
+        })
 
-for (let iter of range(10))
-    console.log(iter, ff(iter))
+    console.log('resolved', foo)
+    return foo
+})
+
+wait_til_resolve()
+    .delay(1000)
+    .then(wait_til_resolve)
+    .then((res) => {
+        console.log('got_result', res)
+    })

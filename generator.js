@@ -20,7 +20,7 @@ const iterate = (iter) => {
     }
 }
 
-const generate = (nn, iter) => {
+const generate = module.exports.generate = (nn, iter) => {
     return _.times(nn, iterate(iter))
         .filter((item) => {
             return !item.done
@@ -50,7 +50,7 @@ generate(10, range(5)).forEach((item) => {
 })
 
 console.log("================================")
-return
+
 const demo_generator = function*(nn) {
     console.log('next', yield 42)
     console.log('next', yield "!!!!!!")
@@ -75,7 +75,11 @@ const demo_generator = function*(nn) {
 
 
 for (let nn of demo_generator("pierre")) {
-    console.log(nn)
+    console.log('for_of', nn)
 }
+
+generate(10, demo_generator('mimi')).forEach((item) => {
+    console.log('lodash', item)
+})
 
 console.log("================================")
