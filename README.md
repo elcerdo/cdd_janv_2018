@@ -19,5 +19,6 @@ npm install
 * **parallel.js** Exemples _multithread_
 * **test_wiseau** Exemple code asynchrone avec `Promise.coroutine`
 
-`async` <---------------> `Promise.coroutine(function*())`
-`await` <---------------> `yield`
+`async` <--> `Promise.coroutine(function*())`
+
+`await` <--> `yield`
