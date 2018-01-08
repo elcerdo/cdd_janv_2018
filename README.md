@@ -18,3 +18,6 @@ npm install
 * **coroutine.js** Utilisation du mot clé yield pour résoudre les promesses
 * **parallel.js** Exemples _multithread_
 * **test_wiseau** Exemple code asynchrone avec `Promise.coroutine`
+
+`async` <---------------> `Promise.coroutine(function*())`
+`await` <---------------> `yield`

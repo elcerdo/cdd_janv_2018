@@ -126,4 +126,28 @@ const main = Promise.coroutine(function*() {
 
 })
 
-main()
+const main_ = async function() {
+    const aa = await delayedTask(1000, 'coucou')
+    console.log('single_task', aa)
+    console.log("================================")
+
+    const bb = await spreadTask([
+        delayedTask(1000, 'slow'),
+        delayedTask(500, 'fast'),
+        delayedTask(750, 'medium'),
+        //failingTask(600),
+    ])
+    console.log('spread', bb)
+    console.log("================================")
+
+    const ee = await spreadTask([
+        delayedTask(1000, 'slow'),
+        delayedTask(500, 'fast'),
+        delayedTask(750, 'medium'),
+        failingTask(600),
+    ])
+    console.log('spread', ee)
+    console.log("================================")
+}
+
+main().then(main_)
