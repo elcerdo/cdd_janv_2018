@@ -2,11 +2,12 @@
   "name": "cdd_janv_2018",
   "version": "1.0.0",
   "description": "club des devs @ creatis",
-  "main": "start.js",
+  "main": "main.js",
   "scripts": {},
   "author": "Pierre Gueth",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "lodash": "^4.17.4"
   }
 }
