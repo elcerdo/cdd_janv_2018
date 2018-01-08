@@ -1,0 +1,12 @@
+{
+  "name": "cdd_janv_2018",
+  "version": "1.0.0",
+  "description": "club des devs @ creatis",
+  "main": "start.js",
+  "scripts": {},
+  "author": "Pierre Gueth",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
