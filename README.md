@@ -1,5 +1,4 @@
-# Club des devs @CREATIS
-`12/01/2018`
+# Club des devs @CREATIS `12/01/2018`
 
 ## Installation
 
@@ -11,3 +10,5 @@ npm install
 ~~~
 
 ## Présentation
+
+* `generator.js` Générateur `function*()` et mot clé `yield`
